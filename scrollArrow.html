@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+   #arrowUp {
+    position: fixed;
+    right: 10px; bottom: 10px;
+    font-size: 48px;
+   }
+   #arrowUp a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+   }
+  </style>
+<body>
+<p id="top" style="height: 2000px;">Прокрути меня вниз</p>
+</body>
+<script type="text/javascript">
+   var appended = false, arrow = document.createElement("div");
+   arrow.id = "arrowUp";
+   arrow.innerHTML = '<a href="#top">&uarr;</a>';
+   window.onscroll = function() {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop > 500) {
+     if (!appended) {
+      document.body.appendChild(arrow);
+      appended = true;
+     }
+    } else {
+     if (appended) {
+      document.body.removeChild(arrow);
+      appended = false;
+     } 
+    }
+   }
+  </script>
+<!-- window.open('http://google.com'); -->
+
+
+</html>
+
+
+
+
