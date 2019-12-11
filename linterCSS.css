@@ -1,0 +1,19 @@
+
+*[style],/*инлайн стили*/
+a:not([href]), /*Битые ссылки и ссылки без атрибута href*/
+a[href="#"], 
+a[href=""], 
+a[href*="javascript:void(0)"],
+meta[charset]:not([charset="UTF-8"]), /*кодировка*/
+meta[name="viewport"][content*="user-scalable=no"], 
+meta[name="viewport"][content*="maximum-scale"], 
+meta[name="viewport"][content*="minimum-scale"],
+form:not([name]):not([id]),
+form:not([name]):not([id]),  /*недоступный вьюпорт*/ 
+input:not([id]), /*элты формы без маркеров*/ 
+select:not([id]),  
+textarea:not([id]),
+label:not([for]),
+button:empty, /*Пустые интерактивные элементы*/ 
+a:empty
+ { border: 5px solid red; }
