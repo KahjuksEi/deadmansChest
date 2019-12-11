@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+#slides {position: relative;height: 300px;padding: 0px;margin: 0px;list-style-type: none;}
+.slide {position: absolute;left: 0px;top: 0px;width: 100%;height: 100%;opacity: 0;z-index: 1;-webkit-transition: opacity 1s;-moz-transition: opacity 1s;-o-transition: opacity 1s;transition: opacity 1s;font-size: 40px;padding: 40px;box-sizing: border-box;background: #333;color: #fff;}
+.showing {opacity: 1;z-index: 2;}
+.slide:nth-of-type(1){background-color: gold;}
+.slide:nth-of-type(2){background-color: teal;}
+.slide:nth-of-type(3){background-color: green;}
+.slide:nth-of-type(4){background-color: red;}
+.slide:nth-of-type(5){background-color: blue;}
+</style>
+<body>
+	
+<ul id="slides">
+ <li class="slide showing">Slide 1</li>
+ <li class="slide">Slide 2</li>
+ <li class="slide">Slide 3</li>
+ <li class="slide">Slide 4</li>
+ <li class="slide">Slide 5</li>
+</ul>
+	
+<button id="pause">Pause</button>
+<button class="controls" id="previous">Previous</button>
+<button class="controls" id="next">Next</button>
+
+<!-- js прячет текущий сайт и показывает следующий -->
+<script type="text/javascript">
+	var slides = document.querySelectorAll('#slides .slide');
+	// создаем переменную для получения текущего слайда.
+	var currSlide = 0;
+	// setInterval ожидает ссылку на ф-ию а не ф-ию, поэтому передаем nextSlide без скобок
+	var slideInterval = setInterval(nextSlide, 1000);
+
+	function nextSlide(){
+		goToSlide(currSlide+1);
+	} 
+  function prevSlide(){
+		goToSlide(currSlide-1);
+	} 
+
+	function goToSlide(n){
+		slides[currSlide].className = 'slide';
+		//оператор % на случай если это был последний слайд, чтобы вернуться к первому. Данный оператор отлично подходит в случаях, когда необходимо выполнять математические операции с циклами типа часов или календаря. В нашем случае 5 слайдов. Посчитаем все числа: 1%5=1, 2%5=2, 3%5=3, 4%5=4, and 5%5=0.
+		currSlide = (n+slides.length)%slides.length;
+		slides[currSlide].className = 'slide showing';
+	}
+	// для prev и next
+	var next = document.getElementById('next');
+	var previous = document.getElementById('previous');
+
+  // чтобы автопроигрывание не помешало переключению между слайдами, мы ставим его на паузу, когда пользователь кликает на кнопки Next и Previous
+	next.onclick = function(){
+		pauseSlideshow();
+		nextSlide();
+	}
+	previous.onclick = function(){
+		pauseSlideshow();
+		prevSlide();
+	}
+
+</script>
+
+<!-- добавление pause -->
+<script type="text/javascript">
+	var playing = true;
+	var pause = document.getElementById('pause');
+
+	function pauseSlideshow(){
+		pause.innerHTML = 'pause';
+		playing = false;
+		// clearInterval() останавливает дальнейшее выполнение функции slideInterval
+		clearInterval(slideInterval); 
+	}
+
+	function playSlideshow(){
+		pause.innerHTML = 'play';
+		playing = true;
+		slideInterval = setInterval(nextSlide, 1000);
+	}
+
+	pause.onclick = function(){
+		if(playing){pauseSlideshow();}
+		else{playSlideshow();}
+	}
+</script>
+
+</body>
+</html>
