@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+	.card {width: 100%;height: 300px;background-color: teal;}
+	img{width: 200px;height: 100px;}
+	.mainblock{display: flex;text-align: center;background-color: green;}
+	form{display: none;width:300px;background-color: gold;}
+</style>
+<body>
+	<form>
+	<p>пример динамической работы формы</p>
+	<div class="form-row">
+		<label>Any pets?</label>
+		<input type="checkbox" id="hasPets" name="hasPets">
+	</div>
+	<div class="form-row" id="pets-row">
+	<label>Pet</label>	
+		<select type="select" id="pet" name="pet">
+			<option value=""></option>
+			<option value="dog">dog</option>
+			<option value="cat">cat</option>
+			<option value="hamster">hamster</option>
+		</select>
+		<div id="pet-feedback"></div>
+	</div>
+	</form>
+
+	<div class="mainblock"></div>
+
+	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="script.js"></script>
+  <script src="formscript.js"></script>
+</body>
+</html>
