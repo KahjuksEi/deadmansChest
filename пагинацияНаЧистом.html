@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagination</title>
+</head>
+<style>
+  table{margin: 0 auto;background-color: lightgrey;font-size: 30px;}
+  #pagination{margin: 0 auto;list-style: none;display: flex;font-size: 30px;width: 200px;justify-content: space-between;}
+  #pagination li {border: 2px solid #707070;}
+  #pagination li:hover, #pagination li:active
+  {cursor: pointer;color: crimson;border:1px solid crimson;}
+
+</style>
+<body>
+  <table id="table">
+    <!-- <tr>
+      <td>name</td>
+      <td>surname</td>
+      <td>age</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>surname</td>
+      <td>age</td>
+    </tr>
+    <tr>
+      <td>name</td>
+      <td>surname</td>
+      <td>age</td>
+    </tr> -->
+  </table>
+
+  <ul id="pagination">
+    <!-- <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li> -->
+  </ul>
+
+</body>
+</html>
+
+<script>
+  let users = [
+    {name: 'name1', surname: 'surname1', age:30},
+    {name: 'name2', surname: 'surname2', age:30},
+    {name: 'name3', surname: 'surname3', age:30},
+    {name: 'name4', surname: 'surname4', age:30},
+    {name: 'name5', surname: 'surname5', age:30},
+    {name: 'name6', surname: 'surname6', age:30},
+    {name: 'name7', surname: 'surname7', age:30},
+    {name: 'name8', surname: 'surname8', age:30},
+    {name: 'name9', surname: 'surname9', age:30},
+    {name: 'name10', surname: 'surname10', age:30},
+    {name: 'name11', surname: 'surname11', age:30},
+    {name: 'name12', surname: 'surname12', age:30},
+    {name: 'name13', surname: 'surname13', age:30},
+];
+
+
+let table = document.querySelector('#table');
+let pagination = document.querySelector('#pagination');
+let notesOnPage = 4;/*любое колво вывода строк на страницу*/
+/*чтоб посчитать сколько переключателей выводить*/
+let countOfItems = Math.ceil(users.length / notesOnPage);
+
+let items= [];
+for(let i=1; i<=countOfItems; i++){
+  let li = document.createElement('li');
+  li.innerHTML = i;
+  pagination.appendChild(li);
+  items.push(li);/*закидываем их в массив*/
+}
+/*при загрузке страницы делаем загруженной 0 элт массива items,
+он же наша первая страница*/
+showPage(items[0]);
+
+for (let item of items){
+  item.addEventListener('click', function(){
+    showPage(this);
+  });
+}
+
+function showPage(item){ /*принимает параметр активной li*/
+  let active = document.querySelector('#pagination li:active');
+ if(active){/*деактивируем активный элт и активируем заново*/
+   active.classList.remove('active');
+ }
+
+    item.classList.add('active');/*делаем активным*/
+   let pageNum = +item.innerHTML; /*чтоб сразу числом*/
+/*1str 0-3
+  2str 3-6
+  3str 6-9
+  etc
+*/
+   let start = (pageNum - 1) * notesOnPage;
+   let end = start + notesOnPage;
+   let notes = users.slice(start, end);
+   /*раз notes это вырезки из users то делаем ф-ию
+   для создания элтов в ее note*/
+   function createCell(text,tr){
+     let td = document.createElement('td');
+     td.innerHTML = text;
+     tr.appendChild(td);
+   }
+
+   table.innerHTML = '';/*обнуляем таблицу перед циклом
+   чтоб добавлялось не в конец списка и создавалась новая стр*/
+   for(let note of notes){
+     let tr = document.createElement('tr');
+     table.appendChild(tr);
+
+     createCell(note.name, tr);
+     createCell(note.surname, tr);
+     createCell(note.agename, tr);
+
+   }
+}
+
+</script>
