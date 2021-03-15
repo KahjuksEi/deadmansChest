@@ -1,0 +1,130 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <style>
+      /* animation speed */
+      .container {
+        /* -webkit-animation: rotate 18s infinite linear; 
+    animation: rotate 18s infinite linear; */
+        animation-name: rotate;
+        animation-duration: 18s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        -webkit-animation-name: rotate;
+        -webkit-animation-duration: 18s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+      }
+      /* native */
+      .cube {
+        -webkit-transform: scaleX(0.7) scaleY(0.7);
+        -ms-transform: scaleX(0.7) scaleY(0.7);
+        transform: scaleX(0.7) scaleY(0.7);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        box-sizing: border-box;
+      }
+      .stage {
+        width: 240px;
+        height: 200px;
+        overflow: hidden;
+      }
+      .cube {
+        width: 240px;
+        height: 200px;
+        -ms-perspective: 1000px;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+        -ms-perspective-origin: center center;
+        -webkit-perspective-origin: center center;
+        perspective-origin: center center;
+      }
+      .container {
+        display: block;
+        width: 240px;
+        height: 200px;
+        -ms-transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+      .side {
+        display: block;
+        position: absolute;
+        width: 241px;
+        height: 200px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      .face1 {
+        -webkit-transform: translateZ(120px);
+        transform: translateZ(120px);
+        background-image: url("1.png");
+      }
+      .face2 {
+        -webkit-transform: translateX(120px) rotateY(90deg);
+        transform: translateX(120px) rotateY(90deg);
+        background-image: url("2.png");
+      }
+      .face3 {
+        -webkit-transform: translateZ(-120px) scale(-1, 1);
+        transform: translateZ(-120px) scale(-1, 1);
+        background-image: url("3.png");
+      }
+      .face4 {
+        -webkit-transform: translateX(-120px) rotateY(90deg) scale(-1, 1);
+        transform: translateX(-120px) rotateY(90deg) scale(-1, 1);
+        background-image: url("4.png");
+      }
+
+      @-webkit-keyframes rotate {
+        100% {
+          -webkit-transform: rotateY(-360deg);
+          transform: rotateY(-360deg);
+        }
+      }
+      @keyframes rotate {
+        100% {
+          -webkit-transform: rotateY(-360deg);
+          transform: rotateY(-360deg);
+        }
+      }
+
+      /*коррекция 3D баннера под ИЭ*/
+      @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+        .container {
+          animation: unset !important;
+        }
+        .face2 {
+          display: none !important;
+        }
+        .face3 {
+          display: none !important;
+        }
+        .face4 {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body cz-shortcut-listen="true">
+    <div class="stage">
+      <div class="cube">
+        <a
+          class="container"
+          target="_blank"
+          href="https://b.exkavator.ru/delivery/ck.php?oaparams=2__baid=0000__zoneid=000__cb=3f91ead24b__oadest=https%3A%2F%2Fwww.chetra.ru%2Fcontacts%2Fsales-tech%2F"
+        >
+          <span class="face1 side"></span>
+          <span class="face2 side"></span>
+          <span class="face3 side"></span>
+          <span class="face4 side"></span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
